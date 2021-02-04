@@ -3,6 +3,7 @@ from tkinter import ttk
 import random
 from bubbleSort import bubble_sort
 from quicksort import quick_sort
+from mergesort import merge_sort
 
 root = Tk()
 root.title('Sorting ALgorithm Visualization')
@@ -48,10 +49,12 @@ def startAlgorithm():
 
     if algMenu.get() == 'Quick Sort':
         quick_sort(data, 0, len(data)-1, drawData, speedScale.get())
-        drawData(data, ['green' for x in range(len(data))])
     elif algMenu.get() == 'Bubble Sort':
         bubble_sort(data, drawData, speedScale.get())
-        drawData(data, ['green' for x in range(len(data))])
+    elif algMenu.get() == 'Merge Sort':
+        merge_sort(data, drawData, speedScale.get())
+    
+    drawData(data, ['green' for x in range(len(data))])
 
 #frame
 ui_frame = Frame(root, width=250, height=700, bg='grey')
@@ -62,7 +65,7 @@ canvas = Canvas(root, width=800, height=700, bg='white')
 canvas.grid(row=0, column=1)
 
 Label(ui_frame, text="Algorithm", bg='grey').grid(row=0, column=0, padx=5, pady=(50,10))
-algMenu = ttk.Combobox(ui_frame,  textvariable=selected_algo, width=15, values=['Bubble Sort','Quick Sort'])
+algMenu = ttk.Combobox(ui_frame,  textvariable=selected_algo, width=15, values=['Bubble Sort','Quick Sort', 'Merge Sort'])
 algMenu.grid(row=0, column=1, padx=5, pady=(50, 10))
 algMenu.current(0)
 
