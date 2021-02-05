@@ -2,8 +2,12 @@ from tkinter import *
 from tkinter import ttk 
 import random
 from bubbleSort import bubble_sort
-from quicksort import quick_sort
+from selectionsort import selection_sort
+from insertionsort import insertion_sort
 from mergesort import merge_sort
+from quicksort import quick_sort
+from heapsort import heap_sort
+from shellsort import shell_sort
 
 root = Tk()
 root.title('Sorting ALgorithm Visualization')
@@ -20,7 +24,7 @@ def drawData(data, colorArray):
     c_height=700
     x_width=c_width/(len(data)+1)
     offset = 30
-    spacing = 10
+    spacing = 0
     normalizedData = [i/max(data) for i in data]
     for i, height in enumerate(normalizedData):
         x0 = i * x_width + offset + spacing
@@ -53,6 +57,14 @@ def startAlgorithm():
         bubble_sort(data, drawData, speedScale.get())
     elif algMenu.get() == 'Merge Sort':
         merge_sort(data, drawData, speedScale.get())
+    elif algMenu.get() == 'Selection Sort':
+        selection_sort(data, drawData, speedScale.get())
+    elif algMenu.get() == 'Heap Sort':
+        heap_sort(data, drawData, speedScale.get())
+    elif algMenu.get() == 'Insertion Sort':
+        insertion_sort(data, drawData, speedScale.get())
+    elif algMenu.get() == 'Shell Sort':
+        shell_sort(data, drawData, speedScale.get())
     
     drawData(data, ['green' for x in range(len(data))])
 
@@ -65,7 +77,7 @@ canvas = Canvas(root, width=800, height=700, bg='white')
 canvas.grid(row=0, column=1)
 
 Label(ui_frame, text="Algorithm", bg='grey').grid(row=0, column=0, padx=5, pady=(50,10))
-algMenu = ttk.Combobox(ui_frame,  textvariable=selected_algo, width=15, values=['Bubble Sort','Quick Sort', 'Merge Sort'])
+algMenu = ttk.Combobox(ui_frame,  textvariable=selected_algo, width=15, values=['Bubble Sort', 'Selection Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap Sort', 'Shell Sort'])
 algMenu.grid(row=0, column=1, padx=5, pady=(50, 10))
 algMenu.current(0)
 
