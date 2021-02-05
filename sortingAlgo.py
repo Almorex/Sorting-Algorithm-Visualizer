@@ -31,7 +31,10 @@ def drawData(data, colorArray):
         y0 = c_height - height * 660 
         x1 = (i+1)*x_width+offset
         y1 = c_height
-        canvas.create_rectangle(x0,y0,x1,y1,fill=colorArray[i])
+        if (i < len(colorArray)):
+            canvas.create_rectangle(x0,y0,x1,y1,fill=colorArray[i])
+        else:# for special case of heapsort
+            canvas.create_rectangle(x0,y0,x1,y1,fill='green')
         canvas.create_text(x0+2, y0, anchor=SW, text=str(data[i]))
     
     root.update_idletasks()
